@@ -1,5 +1,7 @@
 package com.zain.springboottutorial.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -57,5 +59,24 @@ public class Department {
 
     public void setDepartmentCode(String departmentCode) {
         this.departmentCode = departmentCode;
+    }
+
+    @JsonIgnore
+    public boolean isValid(){
+        if(this.getDepartmentName() != "" && this.getDepartmentAddress() != "" && this.getDepartmentCode() != "") {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Department{");
+        sb.append("departmentId=").append(departmentId);
+        sb.append(", departmentName='").append(departmentName).append('\'');
+        sb.append(", departmentAddress='").append(departmentAddress).append('\'');
+        sb.append(", departmentCode='").append(departmentCode).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
